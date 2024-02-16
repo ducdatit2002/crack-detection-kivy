@@ -6,3 +6,4 @@ matplotlib==3.5.2
 kivy==2.2.1
 opencv-python
 streamlit
+cv2
