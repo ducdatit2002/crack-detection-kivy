@@ -1,0 +1,104 @@
+<Header>:
+    canvas.before:
+        Color:
+            rgba: (19/255, 98/255, 197/255, 1)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<CrackContainer1>:
+    close_cam: close_cam
+    start_cam: start_cam
+    
+    BoxLayout:
+        orientation: 'vertical'
+        size: root.width, self.height
+
+        RelativeLayout:  # Sử dụng RelativeLayout để định vị logo và label
+            size_hint_y: None
+            height: dp(100)
+
+            Header:
+                top: self.parent.top  # Điều chỉnh để header nằm phía trên cùng
+                size: root.width, self.height
+
+            BoxLayout:
+                orientation: 'horizontal'
+                size_hint: None, None
+                size: dp(430), dp(100)
+                valign: 'middle'
+                Image:
+                    size_hint_x: None
+                    width: dp(80)
+                    center_y: self.parent.center_y
+                    source: 'logo.png'
+                Label:
+                    font_size: 45
+                    text: "AIOT LAB VN"
+                    color: 0, 0, 0, 1
+                    bold: True
+        OpenCamera:
+            id: camera
+            play: True
+            opacity: 1
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint_y: None
+            size: 430, 150
+            padding: 10
+            spacing: 20
+            canvas.before:
+                Color:
+                    rgba: 0.85, 0.85, 0.85, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            Label:
+                text: "Report result:"
+                size_hint: None, None
+                size: 430, 40
+                font_size: 40
+                color: 0, 0, 0, 1
+                bold: True
+                halign: 'left'
+                valign: 'middle'  # Điều chỉnh để căn giữa theo chiều dọc
+        RelativeLayout:
+            orientation: 'horizontal'
+            size_hint_y: None
+            size: 430, 170
+            padding: 30, 30
+            Image:
+                source: 'gallery-icon.png'
+                size_hint: None, None
+                size: 160, 160
+                pos_hint: {'center_x': 0.25}
+                valign: 'center'
+                halign: 'center'
+            Button:
+                size_hint: None, None
+                size: 85, 85
+                pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                id: start_cam
+                on_release:
+                    self.opacity = 1
+                    camera.play = False
+                    root.capture()
+                canvas.before:
+                    Color:
+                        rgba: 0.7, 0.7, 0.7, 1
+                    RoundedRectangle:
+                        size: self.size
+                        pos: self.pos
+                        radius: [42, 42, 0, 0]
+                    Color:
+                        rgba: (19/255, 98/255, 197/255, 1)
+                    Line:
+                        width: 4
+                        rectangle: (self.x, self.y, self.width, self.height)
+            Image:
+                source: 'return-img.png'
+                size_hint: None, None
+                size: 100, 100
+                pos_hint: {'center_x': 0.75, 'center_y': 0.5}
+                valign: 'center'
+                halign: 'center'

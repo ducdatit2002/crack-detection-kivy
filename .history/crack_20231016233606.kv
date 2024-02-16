@@ -1,0 +1,37 @@
+#:kivy 2.0.0
+
+<Header>:
+    BoxLayout:
+        size_hint_y: None
+        height: 100
+        canvas:
+            Color:
+                rgba: 0.07, 0.38, 0.77, 1
+            Rectangle:
+                size: self.size
+                pos: self.pos
+        Label:
+            text: 'Header'
+            font_size: 30
+            color: 1, 1, 1, 1
+            size_hint_x: 0.5
+            text_size: self.size
+            halign: 'center'
+            valign: 'middle'
+        Label:
+            text: ''
+            size_hint_x: 0.5
+            text_size: self.size
+            halign: 'center'
+            valign: 'middle'
+
+<CrackContainer1>:
+    name: "first"
+    open_cam: open_cam
+
+        RelativeLayout:
+        orientation:"vertical"
+        size: root.width, self.height
+        Header:
+            top: root.top
+            size: root.width, self.height

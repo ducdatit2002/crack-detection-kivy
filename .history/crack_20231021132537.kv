@@ -1,0 +1,121 @@
+#:kivy 2.2.1
+
+<Header>:
+    canvas:
+        Color:
+            rgba: (19/255, 98/255, 197/255, 1)
+        Rectangle:
+            pos: self.pos
+            size: root.width, dp(100)
+    
+
+<OpenCamera>:
+    resolution: (430, 531)
+    play: True
+    #keep_ratio: True
+    orientation: 'portrait'
+    angle: 90
+
+<CrackContainer1>:
+    canvas.before:
+        Color:
+            rgba: 180, 180, 180, 180
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+
+    RelativeLayout:
+        orientation:"vertical"
+        size: root.width, self.height
+        Header:
+            top: root.top
+            size: root.width, self.height
+
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint_y: None
+            height: dp(100)
+
+            Image:
+                size_hint_x: None
+                padding_x: 20
+                width: dp(80)  
+                source: 'logo2.png'
+            Label:
+                font_size: 45
+                text: "AIOT LAB VN"
+                color: 1, 1, 1, 1
+                bold: True
+        OpenCamera:
+            id: camera
+            play: True
+            opacity: 1
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint_y: None
+            size: 430, 150
+            padding: 10
+            spacing: 20
+            canvas.before:
+                Color:
+                    rgba: 0.85, 0.85, 0.85, 1  # Màu nền #D9D9D9
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            Label:
+                text: "Report result:"
+                size_hint: None, None
+                size: 430, 40
+                font_size: 40
+                color: 0, 0, 0, 1  # Màu chữ #FFFFFF
+                bold: True
+                halign: 'left'  # Căn giữa theo chiều ngang
+                valign: 'middle'  # Căn giữa theo chiều dọc
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint_y: None
+            size: 430, 150
+            padding: 10, 10  # Padding trên và dưới
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 1, 1  
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            Image:
+                source: 'gallery-icon.png'  # Đường dẫn đến biểu tượng thư viện
+                size_hint: None, None
+                size: 120, 120
+                pos_hint: {'center_x': 0.25}  # Đặt biểu tượng ở giữa của bên trái
+            Image:
+                source: 'return-img.png'  # Đường dẫn đến biểu tượng thư viện
+                size_hint: None, None
+                size: 120, 120
+                pos_hint: {'center_x': 1.75}  # Đặt biểu tượng ở giữa của bên trái
+
+        Button:
+            size_hint: None, None
+            size: 85, 85  # Kích thước nút chụp hình
+            pos_hint: {'center_x': 0.5, 'center_y': 0.04}  # Đặt nút chụp hình ở giữa theo trục x
+            on_release:
+                self.opacity = 1
+                camera.play = False
+                root.capture()
+            canvas.before:
+                Color:
+                    rgba: 0.7, 0.7, 0.7, 1  # Màu xám cho nền
+                RoundedRectangle:
+                    size: self.size
+                    pos: self.pos
+                    radius: [42, 0, 0, 42]  # Để làm cho góc trái là góc tròn
+                Color:
+                    rgba: (19/255, 98/255, 197/255, 1)  # Màu xanh dương cho viền
+                Line:
+                    width: 4
+                    rectangle: (self.x, self.y, self.width, self.height)
+        Image:
+                source: 'return-img.png'  # Đường dẫn đến biểu tượng thư viện
+                size_hint: None, None
+                size: 120, 120
+                pos_hint: {'center_x': 1.75}  # Đặt biểu tượng ở giữa của bên trái

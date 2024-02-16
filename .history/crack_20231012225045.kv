@@ -1,0 +1,230 @@
+#:kivy 2.2.1
+
+<RoundedButton@Button>:
+	background_color: (0,0,0,0)
+	background_normal: ''
+    padding: 10
+	canvas.before:
+		Color:
+			rgba: (217/255,217/255,217/255,1)
+		RoundedRectangle:
+			size: self.size
+			pos: self.pos
+			radius: [8]
+
+<Header>:
+    canvas.before:
+        Color:
+            rgba: 19/255, 98/255, 197/255, 1
+        BoxShadow:
+            pos: self.pos
+            size: root.width, dp(100)
+            offset: 0, -10
+            blur_radius: 35
+            spread_radius: -10, -10
+
+    canvas:
+        Color:
+            rgba: 180, 180, 180, 180
+        Rectangle:
+            pos: self.pos
+            size: root.width, dp(100)
+
+<OpenCamera>:
+    resolution: (300, 400)
+    play: False
+    #keep_ratio: True
+    pos_hint:{"x":-0.4, "y":0.09}
+
+
+<CrackContainer1>:
+    name: "first"
+    open_cam: open_cam
+
+    canvas.before:
+        Color:
+            rgba: 180, 180, 180, 180
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+
+    RelativeLayout:
+        orientation:"vertical"
+        size: root.width, self.height
+        Header:
+            top: root.top
+            size: root.width, self.height
+
+
+        Image:
+            top: root.top
+            size_hint_y: None
+            height: dp(67)
+            source: 'logo2.png'
+
+        Label:
+            top: root.top - 120
+            font_size: 24
+            text: "CRACK DETECTION APP"
+            color: 0, 0, 0, 1
+            size_hint: None, None # Shrink the label size to the text size
+            size: root.width, 30
+            text_size: self.size
+            halign: 'left'
+            valign: 'top'
+            padding: 10, 0
+
+        OpenCamera:
+            id: camera
+            play: False
+            opacity: 0
+
+
+        RoundedButton:
+            id: open_cam
+            top: root.top - 180
+            text: 'Open Camera'
+            on_press:
+                self.opacity = 0.5
+            on_release:
+                self.opacity = 1
+                app.root.get_screen("second").ids.camera.play = True
+                app.root.current = 'second'
+
+
+            size_hint: None, None
+            size: dp(142), dp(48)
+            color: 0, 0, 0, 1
+            pos: root.x + 10, self.y
+
+
+
+<CrackContainer2>:
+    name: "second"
+    close_cam: close_cam
+    start_cam: start_cam
+    detect_img: detect_img
+    report: report
+
+    canvas.before:
+        Color:
+            rgba: 180, 180, 180, 180
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+
+    #Detected image
+    Image:
+        id: detect_img
+        pos_hint: {"center_x":0.5, "center_y":0.4}
+        size_hint: None, None
+        width: dp(250)
+        height: dp(250)
+
+    RelativeLayout:
+        orientation:"vertical"
+        size: root.width, self.height
+        Header:
+            top: root.top
+            size: root.width, self.height
+
+        Image:
+            top: root.top
+            size_hint_y: None
+            height: dp(67)
+            #center_x: root.width / 2
+            source: 'logo.png'
+
+
+
+        Label:
+            top: root.top - 120
+            font_size: 24
+            text: "CRACK DETECTION APP"
+            color: 0, 0, 0, 1
+            size_hint: None, None # Shrink the label size to the text size
+            size: root.width, 30
+            text_size: self.size
+            halign: 'left'
+            valign: 'top'
+            padding: 10, 0
+
+
+        # OpenCamera:
+        #     id: camera
+        #     play: False
+        #     resolution: (320, 320)
+        #     pos_hint_y: None
+        #     pos: root.x + 50, root.y
+
+        #Close Button
+        RoundedButton:
+            canvas.before:
+                Color:
+                    rgba: (255/255, 102/255, 102/255, 1) #Red
+                RoundedRectangle:
+			        size: self.size
+			        pos: self.pos
+            radius: 15
+            id: close_cam
+            top: root.top - 160
+            text: 'Close camera'
+            bold: True
+            on_press:
+                self.opacity = 0.5
+            on_release:
+                camera.play = False
+                self.opacity = 1
+                root.manager.current = 'first'
+                root.remove_img()
+                root.remove_result()
+            size_hint: None, None
+            size: dp(100), dp(30)
+            color: 1, 1, 1, 1
+            pos: root.x + 10, self.y
+
+        OpenCamera:
+            id: camera
+            play: False
+            resolution: (195, 195)
+            pos_hint: {'center_x': 0.5, 'center_y': 0.68}
+
+        
+        #Result detected on screen (area, score)
+        Label:
+            id: report
+            font_size: 16
+            # halign: "left"
+            # valign: "bottom"
+            text_size: self.size
+            color: 0, 0, 0, 1
+            pos_hint: {"x": 0.2, "y":0.2}
+
+        #Capture Button
+        RoundedButton:
+            canvas.before:
+                Color:
+                    rgba: (102/255, 178/255, 255/255, 1) #Blue
+                RoundedRectangle:
+			        size: self.size
+			        pos: self.pos
+            radius: 15
+            id: start_cam
+            top: root.top - 465
+            text: 'Capture Image'
+            bold: True
+            on_press: self.opacity = 0.5
+            on_release:
+                self.opacity = 1
+                camera.play = False
+                root.capture()
+            size_hint: None, None
+            size: dp(100), dp(30)
+            color: 1, 1, 1, 1
+            pos: root.x + 10, self.y
+
+
+
+

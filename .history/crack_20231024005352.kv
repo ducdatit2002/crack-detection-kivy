@@ -1,0 +1,64 @@
+#:kivy 2.2.1
+
+<Header>:
+    canvas.before:
+        Color:
+            rgba: (19/255, 98/255, 197/255, 1)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<OpenCamera>:
+    resolution: (430, 531)
+    play: True
+    #keep_ratio: True
+    orientation: 'portrait'
+    angle: 90
+
+<CrackContainer1>:
+    start_cam: start_cam
+    detect_img: detect_img
+    report: report
+    
+    canvas.before:
+        Color:
+            rgba: 180, 180, 180, 180
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    BoxLayout:
+        orientation:"vertical"
+        size: root.width, self.height
+
+        RelativeLayout:  # Sử dụng RelativeLayout để định vị logo và label
+            size_hint_y: None
+            height: dp(100)
+            Header:
+                top: root.top
+                size: root.width, self.height
+                RelativeLayout:
+                    orientation: 'horizontal'
+                    size_hint: None, None
+                    size: dp(430), dp(100)  # Điều chỉnh kích thước của phần logo và label
+                    valign: 'middle'
+                    canvas.before:
+                        Color:
+                            rgba: (19/255, 98/255, 197/255, 1)  
+                        Rectangle:
+                            pos: self.pos
+                            size: self.size
+                    Image:
+                        size_hint_x: None
+                        width: dp(80)
+                        pos_hint: {'center_x': 0.3, 'center_y': 0.5}
+                        center_y: self.parent.center_y
+                        source: 'logo2.png'
+                        valign: 'middle'
+                    Label:
+                        font_size: 55
+                        pos_hint: {'center_x': 0.6, 'center_y': 0.5}
+                        text: "AIOT LAB VN"
+                        color: 1, 1, 1, 1
+                        bold: True
+                        valign: 'middle'
+   

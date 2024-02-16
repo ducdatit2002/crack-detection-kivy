@@ -1,0 +1,6 @@
+torch==2.0.1
+numpy==1.24.3
+torchvision==0.15.2
+ultralytics==8.0.186
+matplotlib==3.5.2
+kivy==2.2.1

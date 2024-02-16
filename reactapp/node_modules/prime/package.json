@@ -1,0 +1,40 @@
+{
+  "name": "prime",
+  "homepage": "https://github.com/mootools/prime",
+  "version": "0.5.0",
+  "main": "./index.js",
+  "description": "prime, an OOP JavaScript library for node and the web.",
+  "keywords": [
+    "library",
+    "framework",
+    "es5",
+    "class",
+    "array",
+    "object"
+  ],
+  "author": "Valerio Proietti <@kamicane> (http://mad4milk.net)",
+  "contributors": [
+    "Arian Stolwijk <@arian> (http://aryweb.nl)"
+  ],
+  "bugs": {
+    "url": "https://github.com/kamicane/prime/issues"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/kamicane/prime.git"
+  },
+  "dependencies": {
+    "mout": "^0.11.0"
+  },
+  "devDependencies": {
+    "coveralls": "^2.11.2",
+    "expect.js": "~0.3.1",
+    "istanbul": "^0.3.13",
+    "mocha": "^2.2.4",
+    "mocha-lcov-reporter": "0.0.2"
+  },
+  "scripts": {
+    "test": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
+  }
+}

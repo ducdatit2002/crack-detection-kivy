@@ -1,0 +1,52 @@
+#:kivy 2.2.1
+
+<Header>:
+    canvas:
+        Color:
+            rgba: (19/255, 98/255, 217/255, 1)
+        Rectangle:
+            pos: self.pos
+            size: root.width, dp(100)
+
+<OpenCamera>:
+    resolution: (300, 400)
+    play: False
+    #keep_ratio: True
+    pos_hint:{"x":-0.4, "y":0.09}
+
+<CrackContainer1>:
+    name: "first"
+
+
+    canvas.before:
+        Color:
+            rgba: 180, 180, 180, 180
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+
+    RelativeLayout:
+        orientation:"vertical"
+        size: root.width, self.height
+        Header:
+            top: root.top
+            size: root.width, self.height
+
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint_y: None
+            height: dp(100)
+
+            Image:
+                size_hint_x: None
+                width: dp(80)  
+                source: 'logo2.png'
+
+            Label:
+                font_size: 24
+                text: "CRACK DETECTION APP"
+                color: 0, 0, 0, 1
+
+
+<CrackContainer1>:
